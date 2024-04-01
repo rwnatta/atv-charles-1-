@@ -12,12 +12,12 @@ if num1 > 9999 or num1 < 0:
     sys.exit()
 
 soma = 0
-soma = + num1 % 10
+soma + = num1 % 10
 num1 //= 10
-soma = + num1 % 10
+soma + = num1 % 10
 num1 //=  10
-soma = + num1 % 10
+soma + = num1 % 10
 num1 //= 10
-soma = + num1 % 10 
+soma + = num1 % 10 
 
 print(f'A soma dos números é: {soma}')
