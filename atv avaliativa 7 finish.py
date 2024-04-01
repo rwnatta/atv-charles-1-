@@ -19,18 +19,17 @@ import math
 
 # Solicita ao usuário que insira os comprimentos dos três lados do triângulo
 lado1 = float(input("Insira o comprimento do primeiro lado do triângulo: "))
-lado2 = float(input("Insira o comprimento do segundo lado do triângulo: "))
+lado2 = float(input("Insira o comprimento do segundo lado do triângulo:  "))
 lado3 = float(input("Insira o comprimento do terceiro lado do triângulo: "))
 
-# Verifica se os comprimentos fornecidos podem formar um triângulo
 if lado1 + lado2 > lado3 and lado1 + lado3 > lado2 and lado2 + lado3 > lado1:
    
     #Calcula os três ângulos do triângulo usando a Lei dos Cossenos
-    angulo1 = round("math.degrees(math.acos((lado2*2 + lado3*2 - lado1*2)" / (2 * lado2 * lado3)), 2.
-    angulo2 = round("math.degrees(math.acos((lado1*2 + lado3*2 - lado2*2)" / (2 * lado1 * lado3)), 2.
+    angulo1 = round("math.degrees(math.acos((lado2*2 + lado32 - lado1*2)" / (2 * lado2 * lado3)), 2.
+    angulo2 = round("math.degrees(math.acos((lado1*2 + lado32 - lado2*2)" / (2 * lado1 * lado3)), 2.
     angulo3 = round(180 - angulo1 - angulo2, 2)
 
-    #Classifique o triângulo quanto aos lados e aos ângulos
+    #Classifique os lados e ângulos do triângulo
     if lado1 == lado2 == lado3:
         tipo_lados = "Equilátero"
     elif lado1 == lado2 or lado1 == lado3 or lado2 == lado3:
@@ -45,7 +44,7 @@ if lado1 + lado2 > lado3 and lado1 + lado3 > lado2 and lado2 + lado3 > lado1:
     else:
         tipo_angulos = "Obtuso"
 
-    #Mostre a classificação do triângulo quanto aos lados e aos ângulos
+    #Mostre a classificação dos lados e dos ângulos do triângulo
     print(f"O triângulo é classificado como {tipo_lados} e {tipo_angulos}.")
 else:
     print("Não é possível formar um triângulo com esses lados.")
