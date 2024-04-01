@@ -1,5 +1,6 @@
 '''
 Uma família fez uma viagem de carro e quer detalhes sobre o desempenho do veículo.
+
 Faça um programa que pergunta: o momento inicial da partida (hora e minuto), o momento de chegada
 (hora e minuto), o número de segundos parados para descanso, o número de litros de combustível gasto
 (em l), o preço do litro de combustível (em R$) e a distância percorrida (em Km):
@@ -14,41 +15,45 @@ d) o desempenho do carro (em Km/l, l/h e R$/Km).
 '''
 
 
-hora_inicial, minuto_inicial = (input('Momento Inicial da partida: ')).split(':   ')
-hora_final, minuto_final     = (input('Momento de Chegada: ')).split(':   ')
-segundos_parados             = int(input ('segundos parados para descanso: '))
-litros_combustivel           = float(input('Número de combustível gasto (em litros): '))
-preco_litro_combustivel      = float(input('Preço do litro de combustível (em R$):  '))
-distancia_percorrida         = float(input('Distância percorrida (em Km): '))
+#Tempo em segundos
+def calcular_tempo_segundos(horas, minutos):
+    return horas * 3600 + minutos * 60
 
-#CONVERSÃO DAS VARIAVEIS PRA INTEIRO
-#TEMPO DA VIAGEM
+#Velocidade média
+def calcular_velocidade_media(distancia, tempo_segundos):
+    return distancia / (tempo_segundos / 3600)
 
-hora_inicial   = int(hora_inicial)
-minuto_inicial = int(minuto_inicial)
-hora_final     = int(hora_final)
-minuto_final   = int(minuto_final)
-tempo_viagem   = ((hora_inicial * 3600)-(hora_final * 3600))-((minuto_inicial * 60)-(minuto_final * 60))
-tempo_viagem_com_descanso = tempo_viagem + segundos_parados
+#Custo da viagem com combustível
+def calcular_custo_viagem(litros_combustivel, preco_litro):
+    return litros_combustivel * preco_litro
 
-#VELOCIDADE MÉDIA GLOBAL EM MOVIMENTO
-
-vel_media_global    = distancia_percorrida / (tempo_viagem_com_descanso / 3600)
-vel_media_movimento = distancia_percorrida / ((tempo_viagem + segundos_parados) / 3600)
-
-vel_media_global    = distancia_percorrida / (tempo_viagem / 3600)
-vel_media_movimento = distancia_percorrida / ((tempo_viagem + segundos_parados) / 3600)
-
-#O CUSTO DA VIAGEM COM COMBUSTIVEL
-custo_viagem = preco_litro_combustivel * litros_combustivel
-
-#O DESEMPENHO DO CARRO
-km_l = litros_combustivel / distancia_percorrida
-l_h  = litros_combustivel / ((tempo_viagem - segundos_parados) / 3600)
-r_km = (litros_combustivel * preco_litro_combustivel) / distancia_percorrida
+#Desempenho do carro
+def calcular_desempenho_carro(distancia, litros_combustivel, custo_viagem):
+    km_por_litro    = distancia / litros_combustivel
+    litros_por_hora = litros_combustivel / (tempo_segundos / 3600)
+    custo_por_km    = custo_viagem / distancia
+    return km_por_litro, litros_por_hora, custo_por_km
 
 
-print(f"O tempo de viagem foi: {tempo_viagem_com_descanso} segundos.")
-print(f"A velocidade média  global foi", round(vel_media_global, 2),"(Km/h) e a velocidade média em movimento foi", round(vel_media_movimento, 2),"(Km/h).")
-print(f"O custo da viagem com combustível foi de: R$", round(custo_viagem, 2),"." )
-print(f"O Desempenho do carro foi de: Consumo médio:", round(km_l, 2), "Km/l, Consumo por hora:", round(l_h, 2), "l/h, Custo por Km:", round(r_km, 2), "R$/Km")
+hora_partida         = int(input("Hora de partida:  "))
+minuto_partida       = int(input("Minuto de partida:  "))
+hora_chegada         = int(input("Hora de chegada:  "))
+minuto_chegada       = int(input("Minuto de chegada:  "))
+segundos_parados     = int(input("Segundos parados para descanso:  "))
+litros_combustivel   = float(input("Litros de combustível gastos:  "))
+preco_litro          = float(input("Preço do litro de combustível (R$):  "))
+distancia_percorrida = float(input("Distância percorrida (em Km):  "))
+
+#Cálculos
+tempo_segundos = calcular_tempo_segundos(hora_chegada - hora_partida, minuto_chegada - minuto_partida - (segundos_parados / 60))
+velocidade_media_global = calcular_velocidade_media(distancia_percorrida, tempo_segundos)
+custo_viagem = calcular_custo_viagem(litros_combustivel, preco_litro)
+km_por_litro, litros_por_hora, custo_por_km = calcular_desempenho_carro(distancia_percorrida, litros_combustivel, custo_viagem)
+
+
+print(f"Tempo de viagem: {tempo_segundos} segundos")
+print(f"Velocidade média global: {velocidade_media_global} Km/h")
+print(f"Custo da viagem com combustível: R$ {custo_viagem}")
+print(f"Desempenho do carro - Km/l: {km_por_litro}, l/h: {litros_por_hora}, R$/Km: {custo_por_km}")
+
+
